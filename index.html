@@ -306,11 +306,22 @@
     }
     /* Extra small devices */
     @media(max-width: 575px) {
+      .video-container {
+        padding-bottom: 0; /* Remove aspect ratio padding */
+        height: auto; /* Allow container to size to content */
+      }
+      .video-container img {
+        position: relative; /* Change from absolute to relative positioning */
+        height: auto; /* Allow image to maintain aspect ratio */
+      }
       .video-overlay {
-        justify-content: center;
+        position: relative; /* Change from absolute to relative positioning */
+        height: auto; /* Allow overlay to size to content */
+        background: var(--bg); /* Use site background color instead of overlay */
+        justify-content: flex-start;
         text-align: center;
-        padding: 0.75rem;
-        background: rgba(0,0,0,0.8); /* Even darker background for smallest screens */
+        padding: 1.5rem 0.75rem;
+        margin-top: 0;
       }
       .video-overlay h2 {
         font-size: 1.2rem;
@@ -328,6 +339,12 @@
         font-size: 0.75rem;
         margin: 0 auto;
         border-radius: 18px;
+      }
+      .play-btn {
+        position: absolute;
+        top: 50%;
+        opacity: 0;
+        z-index: 3;
       }
     }
     @media(min-width: 768px) {

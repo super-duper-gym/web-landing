@@ -587,6 +587,34 @@
       background: var(--accent);
       transform: translateY(-5px);
     }
+
+    /* Disabled platform styles */
+    .disabled-platform {
+      opacity: 0.7;
+      cursor: not-allowed;
+      position: relative;
+      border: 1px dashed rgba(255, 51, 102, 0.5);
+    }
+
+    .disabled-platform:hover {
+      transform: none;
+      background: var(--platform-bg);
+      border-color: rgba(255, 51, 102, 0.5);
+    }
+
+    .coming-soon-badge {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
     .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
@@ -748,10 +776,6 @@
       <button id="closeOverlay" class="close-btn">&times;</button>
       <h2>CHOOSE YOUR WEAPON</h2>
       <div class="platform-buttons">
-        <a href="https://example.com/ios" class="platform-btn">
-          <img src="assets/ios.svg" alt="iOS" class="platform-icon" />
-          iOS
-        </a>
         <a href="https://github.com/super-duper-gym/mobile-app/releases/latest/download/composeApp-release.apk" class="platform-btn">
           <img src="assets/android.png" alt="Android" class="platform-icon" />
           Android
@@ -760,6 +784,11 @@
           <img src="assets/web.png" alt="Web" class="platform-icon" />
           Web
         </a>
+        <div class="platform-btn disabled-platform">
+          <img src="assets/ios.svg" alt="iOS" class="platform-icon" />
+          iOS
+          <div class="coming-soon-badge">Coming Soon</div>
+        </div>
       </div>
     </div>
   </div>

@@ -774,33 +774,84 @@
   <div id="overlay" class="overlay">
     <div class="overlay-content">
       <button id="closeOverlay" class="close-btn">&times;</button>
-      <h2>CHOOSE YOUR WEAPON</h2>
-      <div class="platform-buttons">
-        <a href="https://github.com/super-duper-gym/mobile-app/releases/latest/download/composeApp-release.apk" class="platform-btn">
-          <img src="assets/android.png" alt="Android" class="platform-icon" />
-          Android
-        </a>
-        <a href="https://app.spotted.fit" class="platform-btn">
-          <img src="assets/web.png" alt="Web" class="platform-icon" />
-          Web
-        </a>
-        <div class="platform-btn disabled-platform">
-          <img src="assets/ios.svg" alt="iOS" class="platform-icon" />
-          iOS
-          <div class="coming-soon-badge">Coming Soon</div>
+      <!-- Email Form Step -->
+      <div id="emailFormStep">
+        <h2>FILL IN YOUR DETAILS</h2>
+        <div data-tf-live="01JT2DYWZQFXK8ZABVKWSDF3XS"></div>
+      </div>
+
+      <!-- Platform Selection Step (initially hidden) -->
+      <div id="platformStep" style="display: none;">
+        <h2>CHOOSE YOUR WEAPON</h2>
+        <div class="platform-buttons">
+          <a href="https://github.com/super-duper-gym/mobile-app/releases/latest/download/composeApp-release.apk" class="platform-btn">
+            <img src="assets/android.png" alt="Android" class="platform-icon" />
+            Android
+          </a>
+          <a href="https://app.spotted.fit" class="platform-btn">
+            <img src="assets/web.png" alt="Web" class="platform-icon" />
+            Web
+          </a>
+          <div class="platform-btn disabled-platform">
+            <img src="assets/ios.svg" alt="iOS" class="platform-icon" />
+            iOS
+            <div class="coming-soon-badge">Coming Soon</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="//embed.typeform.com/next/embed.js"></script>
   <script>
     const getStartedBtn = document.getElementById('getStartedBtn');
     const overlay = document.getElementById('overlay');
     const closeOverlay = document.getElementById('closeOverlay');
+    const emailFormStep = document.getElementById('emailFormStep');
+    const platformStep = document.getElementById('platformStep');
 
-    getStartedBtn.addEventListener('click', () => overlay.classList.add('active'));
+    getStartedBtn.addEventListener('click', () => {
+      overlay.classList.add('active');
+
+      // Check if form was previously submitted
+      if (localStorage.getItem('formSubmitted') === 'true') {
+        // If form was submitted, show platform selection directly
+        emailFormStep.style.display = 'none';
+        platformStep.style.display = 'block';
+      } else {
+        // Otherwise show email form
+        emailFormStep.style.display = 'block';
+        platformStep.style.display = 'none';
+      }
+    });
+
     closeOverlay.addEventListener('click', () => overlay.classList.remove('active'));
     overlay.addEventListener('click', e => e.target === overlay && overlay.classList.remove('active'));
+
+    // Listen for Typeform submission
+    window.addEventListener('message', function(event) {
+      // Check if the message is from Typeform and indicates form submission
+      try {
+        const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+
+        // Typeform can send different event formats, so we check for multiple possible submission indicators
+        if (
+          (data.type === 'form-submit') || 
+          (data.eventName === 'form-submit') || 
+          (data.type === 'typeform-submit') || 
+          (data.event_id === 'form_response')
+        ) {
+          // Hide email form and show platform selection
+          emailFormStep.style.display = 'none';
+          platformStep.style.display = 'block';
+
+          // Store that the form has been submitted
+          localStorage.setItem('formSubmitted', 'true');
+        }
+      } catch (e) {
+        console.log('Error processing message event:', e);
+      }
+    });
 
     const animateElements = document.querySelectorAll('.animate-on-scroll');
 

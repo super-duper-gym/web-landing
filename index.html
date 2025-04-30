@@ -155,6 +155,21 @@
       transform: scale(0.9);
       transition: transform 0.5s ease;
     }
+
+    /* Responsive overlay content for mobile */
+    @media (max-width: 767px) {
+      .overlay-content {
+        padding: 1.5rem;
+        max-width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      #emailFormStep h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+    }
     .overlay.active .overlay-content {
       transform: scale(1);
     }
@@ -615,6 +630,33 @@
       font-weight: bold;
       white-space: nowrap;
     }
+
+    /* Typeform responsive styles */
+    @media (max-width: 767px) {
+      [data-tf-live] {
+        min-height: 400px !important;
+      }
+
+      /* Ensure form elements don't overlap */
+      .tf-v1-input, .tf-v1-button {
+        margin-bottom: 15px !important;
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+      }
+
+      /* Add space between form elements */
+      .tf-v1-input-container {
+        margin-bottom: 20px !important;
+      }
+
+      /* Ensure submit button is properly positioned */
+      .tf-v1-button-submit {
+        position: relative !important;
+        margin-top: 20px !important;
+        clear: both !important;
+      }
+    }
     .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
@@ -777,7 +819,7 @@
       <!-- Email Form Step -->
       <div id="emailFormStep">
         <h2>FILL IN YOUR DETAILS</h2>
-        <div data-tf-live="01JT2DYWZQFXK8ZABVKWSDF3XS"></div>
+        <div data-tf-live="01JT2DYWZQFXK8ZABVKWSDF3XS" data-tf-opacity="100" data-tf-hide-headers="true" data-tf-hide-footer="true" data-tf-medium="fragment" data-tf-mobile="true" data-tf-custom-style="margin-bottom: 30px; padding: 10px;" data-tf-auto-focus="true"></div>
       </div>
 
       <!-- Platform Selection Step (initially hidden) -->
